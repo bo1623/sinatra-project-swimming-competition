@@ -1,4 +1,4 @@
-class UsersController < ApplicationController 
+class TeamsController < ApplicationController 
 
   get '/users/:id' do
     if !logged_in?
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     end
   end
 
-  post '/signup' do 
+  post '/signup' do
     if params[:username] == "" || params[:password] == ""
       redirect to '/signup'
     else
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/login' do 
+  get '/login' do
     @error_message = params[:error]
     if !session[:user_id]
       erb :'users/login'

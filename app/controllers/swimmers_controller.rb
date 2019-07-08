@@ -1,4 +1,4 @@
-class GolfBagsController < ApplicationController 
+class SwimmersController < ApplicationController
 
   get "/bags" do
     redirect_if_not_logged_in
