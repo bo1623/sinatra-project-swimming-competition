@@ -6,7 +6,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "golfclubsaregreat"
+    set :session_secret, "swimmingisfun"
   end
 
 
@@ -33,5 +33,3 @@ class ApplicationController < Sinatra::Base
   end
 
 end
-
-#comment
