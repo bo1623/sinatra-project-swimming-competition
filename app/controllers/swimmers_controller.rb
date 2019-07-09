@@ -13,8 +13,9 @@ class SwimmersController < ApplicationController
   end
 
   post '/swimmers' do
+    puts params
     redirect_if_not_logged_in
-    if Swimmer.valid_params(params)
+    if Swimmer.valid_params?(params)
       @swimmer=Swimmer.create(params)
       redirect '/swimmers'
     else
