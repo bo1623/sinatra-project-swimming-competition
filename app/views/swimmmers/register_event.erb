@@ -1,0 +1,13 @@
+<h1>Event Registration</h1>
+
+<h2><%=@team.teamname%></h2>
+
+<%#Please type swimmern name%>
+
+<form method="post" action="/swimmers/register_event">
+  <%@events.each do |event|%>
+    <input type="checkbox" name="swimmer[event_ids][]" value="<%=event.id%>" id="<%=event.name%>"><%=genre.name%></input> 
+
+
+
+</form>

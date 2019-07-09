@@ -10,4 +10,9 @@ class Event < ActiveRecord::Base
     self.find_by("LOWER(eventname)= ?", slug.split("-").join(" "))
   end
 
+  def make_name
+    name="#{self.gender}'s #{self.distance}m #{self.stroke} - #{self.division} Division"
+    name
+  end
+
 end
