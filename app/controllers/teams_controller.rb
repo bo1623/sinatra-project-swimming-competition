@@ -1,62 +1,111 @@
-class TeamsController < ApplicationController 
+class TeamsController < ApplicationController
 
-  get '/users/:id' do
-    if !logged_in?
-      redirect '/bags'
-    end
-
-    @user = User.find(params[:id])
-    if !@user.nil? && @user == current_user
-      erb :'users/show'
-    else
-      redirect '/bags'
-    end
+  get '/teams' do
+    redirect_if_not_logged_in
+    @teams=Team.all
+    erb :'/teams/index'
   end
 
   get '/signup' do
-    if !session[:user_id]
-      erb :'users/new'
+    if logged_in?
+      redirect '/teams' #if logged in then redirect the user to the index, no need for sign up
     else
-      redirect to '/clubs'
+      erb :'/teams/new'
     end
   end
 
   post '/signup' do
-    if params[:username] == "" || params[:password] == ""
-      redirect to '/signup'
+    if params[:teamname]=="" || params[:password]==""
+      redirect '/signup'
     else
-      @user = User.create(:username => params[:username], :password => params[:password])
-      session[:user_id] = @user.id
-      redirect '/bags'
+      @team=Team.create(params)
+      session[:team_id]=@team.id #important so that user is logged in as soon as the team signs up
+      redirect '/teams'
     end
   end
 
   get '/login' do
-    @error_message = params[:error]
-    if !session[:user_id]
-      erb :'users/login'
+    if !!session[:team_id]
+      redirect '/teams'
     else
-      redirect '/bags'
+      erb :'/teams/login'
     end
   end
 
   post '/login' do
-    user = User.find_by(:username => params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect "/bags"
+    team=Team.find_by(teamname: params[:teamname])
+    if team && team.authenticate(params[:password])
+      session[:team_id]=team.id
+      redirect '/teams'
     else
-      redirect to '/signup'
+      redirect '/signup'
     end
   end
 
-  get '/logout' do
-    if session[:user_id] != nil
-      session.destroy
-      redirect to '/login'
-    else
-      redirect to '/'
-    end
+  get '/teams/:id' do
+    redirect_if_not_logged_in
+    @team=Team.find(params[:id])
+    erb :'/teams/show'
   end
 
-end
+
+#   get '/users/:id' do
+#     if !logged_in?
+#       redirect '/bags'
+#     end
+#
+#     @user = User.find(params[:id])
+#     if !@user.nil? && @user == current_user
+#       erb :'users/show'
+#     else
+#       redirect '/bags'
+#     end
+#   end
+#
+#   get '/signup' do
+#     if !session[:user_id]
+#       erb :'users/new'
+#     else
+#       redirect to '/clubs'
+#     end
+#   end
+#
+#   post '/signup' do
+#     if params[:username] == "" || params[:password] == ""
+#       redirect to '/signup'
+#     else
+#       @user = User.create(:username => params[:username], :password => params[:password])
+#       session[:user_id] = @user.id
+#       redirect '/bags'
+#     end
+#   end
+#
+#   get '/login' do
+#     @error_message = params[:error]
+#     if !session[:user_id]
+#       erb :'users/login'
+#     else
+#       redirect '/bags'
+#     end
+#   end
+#
+#   post '/login' do
+#     user = User.find_by(:username => params[:username])
+#     if user && user.authenticate(params[:password])
+#       session[:user_id] = user.id
+#       redirect "/bags"
+#     else
+#       redirect to '/signup'
+#     end
+#   end
+#
+#   get '/logout' do
+#     if session[:user_id] != nil
+#       session.destroy
+#       redirect to '/login'
+#     else
+#       redirect to '/'
+#     end
+#   end
+#
+# end

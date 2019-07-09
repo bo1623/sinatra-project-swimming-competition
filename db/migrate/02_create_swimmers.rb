@@ -5,6 +5,7 @@ class CreateSwimmers < ActiveRecord::Migration
       t.integer :age
       t.string :gender
       t.integer :team_id
+      # t.string :specialty
     end
   end
 end

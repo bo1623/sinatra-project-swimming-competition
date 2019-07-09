@@ -1,47 +1,67 @@
 class SwimmersController < ApplicationController
 
-  get "/bags" do
+  get "/swimmers" do
     redirect_if_not_logged_in
-    @bags = GolfBag.all
-    erb :'golf_bags/index'
+    @swimmers = Swimmer.all
+    erb :'swimmers/index'
   end
 
-  get "/bags/new" do
-    redirect_if_not_logged_in
-    @error_message = params[:error]
-    erb :'golf_bags/new'
-  end
-
-  get "/bags/:id/edit" do
+  get "/swimmers/new" do
     redirect_if_not_logged_in
     @error_message = params[:error]
-    @bag = GolfBag.find(params[:id])
-    erb :'golf_bags/edit'
+    erb :'swimmers/new'
   end
 
-  post "/bags/:id" do
+  post '/swimmers' do
     redirect_if_not_logged_in
-    @bag = GolfBag.find(params[:id])
-    unless GolfBag.valid_params?(params)
-      redirect "/bags/#{@bag.id}/edit?error=invalid golf bag"
+    if Swimmer.valid_params(params)
+      @swimmer=Swimmer.create(params)
+      redirect '/swimmers'
+    else
+      redirect '/swimmers/new?error=invalid attributes'
     end
-    @bag.update(params.select{|k|k=="name" || k=="capacity"})
-    redirect "/bags/#{@bag.id}"
   end
 
-  get "/bags/:id" do
-    redirect_if_not_logged_in
-    @bag = GolfBag.find(params[:id])
-    erb :'golf_bags/show'
+  get '/swimmers/register_event' do
+    @team=Team.find(session[:team_id])
+    @swimmers=@team.swimmers
+    @events=Event.all
+    erb :'/swimmers/register_event'
+    #within this view, create fields for swimmer name (auto dropdown) and show the list of events available in the form of checkboxes
+    #select up to two events
   end
 
-  post "/bags" do
-    redirect_if_not_logged_in
-
-    unless GolfBag.valid_params?(params)
-      redirect "/bags/new?error=invalid golf bag"
+  get '/swimmers/register_event/:slug' do
+    @swimmer=Swimmer.find_by_slug(params[:slug])
+    if Team.find(session[:team_id])==@swimmer.team
+      erb :'/events/register_swimmer'
+    else
+      redirect '/swimmers/register_event'
     end
-    GolfBag.create(params)
-    redirect "/bags"
+    #here for each event, put down the swimmer's timing
   end
-end
+
+  get "/swimmers/:slug/edit" do
+    redirect_if_not_logged_in
+    @error_message = params[:error]
+    @swimmer = Swimmer.find(params[:id])
+    erb :'swimmers/edit'
+  end
+
+  get '/swimmers/:id' do
+    redirect_if_not_logged_in
+    @swimmer=Swimmer.find(params[:id])
+    erb :'/swimmers/show'
+  end
+
+  post "/swimmers/:id" do
+    redirect_if_not_logged_in
+    @swimmer = Swimmer.find(params[:id])
+    if Swimmer.valid_params?(params)
+      @swimmer.update(params.select{|k|k=="name" || k=="capacity"})
+      #selecting the hashes where the key is equal to either name or capacity?
+      redirect "/swimmers/#{@swimmer.id}"
+    else
+      redirect "/swimmers/#{@swimmer.id}/edit?error=invalid attributes"
+    end
+  end
