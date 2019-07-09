@@ -48,6 +48,15 @@ class TeamsController < ApplicationController
     erb :'/teams/show'
   end
 
+  get '/logout' do
+    if !session[:team_id]==nil
+      session.destroy
+      redirect '/login'
+    else
+      redirect '/'
+    end
+  end
+
 end
 
 

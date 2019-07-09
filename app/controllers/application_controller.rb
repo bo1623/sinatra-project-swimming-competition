@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      User.find(session[:team_id])
+      Team.find(session[:team_id])
     end
 
   end

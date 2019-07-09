@@ -1,9 +1,16 @@
 
 <html>
 
+  <ul>
   <%@events.each do |event|%>
-    <%=event.name%>
+    <li><%=event.name%></li>
   <%end%>
+  </ul>
 
+  <%if @team.teamname=="Admin"%>
+    <a href='/events/new'>Add Events</a><br>
+    <a href='/events/delete'>Delete Events</a><br>
+    <a href='/events/edit'>Edit Events</a><br>
+  <%end%>
 
 </html>

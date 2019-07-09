@@ -2,6 +2,7 @@ class EventsController < ApplicationController
 
   get '/events' do
     redirect_if_not_logged_in
+    @team=Team.find(session[:team_id])
     @events=Event.all
     erb :'/events/index' #you could use this page to show the time of the race
   end
