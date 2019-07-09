@@ -11,8 +11,7 @@ class Event < ActiveRecord::Base
   end
 
   def make_name
-    name="#{self.gender}'s #{self.distance}m #{self.stroke} - #{self.division} Division"
-    name
+    "#{self.gender}'s #{self.distance}m #{self.stroke} - #{self.division} Division"
   end
 
 end

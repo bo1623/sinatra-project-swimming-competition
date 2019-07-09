@@ -48,6 +48,8 @@ class TeamsController < ApplicationController
     erb :'/teams/show'
   end
 
+end
+
 
 #   get '/users/:id' do
 #     if !logged_in?
@@ -107,5 +109,3 @@ class TeamsController < ApplicationController
 #       redirect to '/'
 #     end
 #   end
-#
-# end

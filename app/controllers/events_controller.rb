@@ -12,6 +12,13 @@ class EventsController < ApplicationController
     erb :'/events/new'
   end
 
+  post '/events' do
+    @event=Event.create(params)
+    @event.name=@event.make_name
+    @event.save
+    redirect '/events'
+  end
+
   get '/events/edit' do
     @events=Event.all
     #can select events to edit or delete, only available to admin
@@ -22,6 +29,8 @@ class EventsController < ApplicationController
     @swimmers=@event.swimmers
     #this should show the list of swimmers signed up for this event and their respective teams/times
   end
+
+end
 
 #   get "/clubs" do
 #     redirect_if_not_logged_in
@@ -66,4 +75,3 @@ class EventsController < ApplicationController
 #     GolfClub.create(params)
 #     redirect "/clubs"
 #   end
-# end

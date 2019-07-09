@@ -65,3 +65,5 @@ class SwimmersController < ApplicationController
       redirect "/swimmers/#{@swimmer.id}/edit?error=invalid attributes"
     end
   end
+
+end

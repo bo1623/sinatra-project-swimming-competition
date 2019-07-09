@@ -1,4 +1,4 @@
-class CreateSwimmerEvents < ActiveRecord::Migration
+class CreateSwimmerEvents < ActiveRecord::Migration[5.2]
   def change
     create_table :swimmer_events do |t|
       t.integer :swimmer_id
