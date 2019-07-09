@@ -1,0 +1,10 @@
+
+<h2><%=@team.teamname%></h2>
+
+<%# think about how to create a list by division of all the swimmers %>
+<%# add links to swimmer individual profile %>
+<ul>
+<%@swimmers.each do |swimmer|%>
+  <li><%=swimmer.name%></li>
+<%end%>
+</ul>
