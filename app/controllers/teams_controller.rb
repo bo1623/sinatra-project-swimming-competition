@@ -49,7 +49,7 @@ class TeamsController < ApplicationController
   end
 
   get '/logout' do
-    if !session[:team_id]==nil
+    if session[:team_id]!=nil
       session.destroy
       redirect '/login'
     else
@@ -110,11 +110,3 @@ end
 #     end
 #   end
 #
-#   get '/logout' do
-#     if session[:user_id] != nil
-#       session.destroy
-#       redirect to '/login'
-#     else
-#       redirect to '/'
-#     end
-#   end

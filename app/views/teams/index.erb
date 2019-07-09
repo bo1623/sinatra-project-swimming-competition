@@ -1,5 +1,7 @@
 <ul>
 <%@teams.each do |team|%>
-  <li><%=team.teamname%></li>
+  <%if team.teamname!="Admin"%>
+    <li><%=team.teamname%></li>
+  <%end%>
 <%end%>
 </ul>
