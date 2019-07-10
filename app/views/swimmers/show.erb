@@ -1,6 +1,13 @@
 
 
-<h2><%=@team.teamname%></h2>
+<h3>Swimmer Details</h3>
+
+<p>Team Name: <%=@team.teamname%></p>
+<p>Full Name: <%=@swimmer.name%></p>
+<p>Age: <%=@swimmer.age%></p>
+<p>Division: <%=@swimmer.division%></p>
+
+
 <h3>Registered events for <%=@swimmer.name%></h3>
 
 <ul>
@@ -8,3 +15,8 @@
   <li><%=event.name%> Personal Best:<%=event.timing%></li>
 <%end%>
 </ul>
+
+<br>
+
+<a href='/swimmers/<%=@swimmer.slug%>/edit'>Edit Details</a> <!--this is for editing the swimmer details like name, age, whatever-->
+<!-- <a href='/swimmers/' include link for editing events signed up for-->

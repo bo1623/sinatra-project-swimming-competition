@@ -15,5 +15,17 @@ class Swimmer < ActiveRecord::Base
     self.find_by("LOWER(name)= ?", slug.split("-").join(" "))
   end
 
+  def division
+    age=self.age
+    case age
+    when 12..14
+      "C"
+    when 15..16
+      "B"
+    when 17..Float::INFINITY
+      "A"
+    end
+  end
+
 
 end

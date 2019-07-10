@@ -1,10 +1,11 @@
+
 <h1>Event Registration</h1>
 
 <h2><%=@team.teamname%></h2>
 
 
 <form method="post" action="/swimmers/register_event">
-  </label>Please select swimmer: </label><input type="text" name="swimmer[name]" list="swimmer[name]"><br>
+  <label>Please select swimmer: </label><input type="text" name="swimmer[name]" list="swimmer[name]"><br>
   <datalist id="swimmer[name]">
     <%@swimmers.each do |swimmer|%>
       <option value="<%=swimmer.name%>">

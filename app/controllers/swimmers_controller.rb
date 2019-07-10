@@ -60,7 +60,7 @@ class SwimmersController < ApplicationController
   get "/swimmers/:slug/edit" do
     redirect_if_not_logged_in
     @error_message = params[:error]
-    @swimmer = Swimmer.find(params[:id])
+    @swimmer = Swimmer.find(params[:slug])
     erb :'swimmers/edit'
   end
 
@@ -71,7 +71,7 @@ class SwimmersController < ApplicationController
     erb :'/swimmers/show'
   end
 
-  post "/swimmers/:id" do
+  post "/swimmers/:id" do #where is this relevant? what path is dependent on this? How do we create or register new swimmers?
     redirect_if_not_logged_in
     @swimmer = Swimmer.find(params[:id])
     if Swimmer.valid_params?(params)
