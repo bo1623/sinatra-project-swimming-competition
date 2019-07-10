@@ -17,7 +17,10 @@ class SwimmersController < ApplicationController
     puts params
     redirect_if_not_logged_in
     if Swimmer.valid_params?(params)
+      @team=Team.find(session[:team_id])
       @swimmer=Swimmer.create(params)
+      @swimmer.team=@team
+      @swimmer.save
       redirect '/swimmers'
     else
       redirect '/swimmers/new?error=invalid attributes'
@@ -31,6 +34,17 @@ class SwimmersController < ApplicationController
     erb :'/swimmers/register_event'
     #within this view, create fields for swimmer name (auto dropdown) and show the list of events available in the form of checkboxes
     #select up to two events
+  end
+
+  post '/swimmers/register_event' do
+    @swimmer=Swimmer.find_by(name: params[:name])
+    if Team.find(session[:team_id])==@swimmer.team
+      @swimmer.event_ids = params[:event_ids]
+      @swimmer.save
+      redirect :"/swimmers/register_event/#{@swimmer.slug}"
+    else
+      redirect '/swimmers/register_event'
+    end
   end
 
   get '/swimmers/register_event/:slug' do
