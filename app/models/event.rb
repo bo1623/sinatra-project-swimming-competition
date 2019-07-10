@@ -8,7 +8,7 @@ class Event < ActiveRecord::Base
 
   def self.find_by_slug(slug)
     #need to find a way to match slug with name or attributes of the name
-    mod_slug=[slug.split("-")[0...-2].join(" "),slug.split("-")[-2..-1].join(" ")].join("-")
+    mod_slug=[slug.split("-")[0...-2].join(" "),slug.split("-")[-2..-1].join(" ")].join(" - ")
     self.find_by("LOWER(name)= ?", mod_slug)
     #find a way to remove the '-' from name and then apply LOWER?
   end

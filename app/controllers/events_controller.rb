@@ -36,6 +36,10 @@ class EventsController < ApplicationController
     #can select events to edit or delete, only available to admin
   end
 
+  get '/events/:slug/edit' do
+    erb :'/events/edit'
+  end
+
   get '/events/:slug' do
     @event=Event.find_by_slug(params[:slug])
     @swimmers=@event.swimmers
