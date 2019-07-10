@@ -64,9 +64,10 @@ class SwimmersController < ApplicationController
     erb :'swimmers/edit'
   end
 
-  get '/swimmers/:id' do
+  get '/swimmers/:slug' do
     redirect_if_not_logged_in
-    @swimmer=Swimmer.find(params[:id])
+    @team=Team.find(session[:team_id])
+    @swimmer=Swimmer.find_by_slug(params[:slug])
     erb :'/swimmers/show'
   end
 

@@ -1,0 +1,10 @@
+
+
+<h2><%=@team.teamname%></h2>
+<h3>Registered events for <%=@swimmer.name%></h3>
+
+<ul>
+<%@swimmer.events.each do |event|%>
+  <li><%=event.name%> Personal Best:<%=event.timing%></li>
+<%end%>
+</ul>
