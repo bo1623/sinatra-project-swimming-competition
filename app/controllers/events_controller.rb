@@ -37,7 +37,6 @@ class EventsController < ApplicationController
   end
 
   get '/events/:slug' do
-    binding.pry
     @event=Event.find_by_slug(params[:slug])
     @swimmers=@event.swimmers
     erb :'/events/swimmers'
