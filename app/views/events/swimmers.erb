@@ -1,0 +1,16 @@
+
+<h3><%=@event.name%></h3>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Personal Best</th>
+  </tr>
+  <tr>
+  <%@swimmers.each do |swimmer|%>
+    <td><%=swimmer.name%></td>
+    <td><%=Event.find_by(swimmer: swimmer).timing.time_to_string%></td>
+  <%end%>
+  </tr>
+
+</table>

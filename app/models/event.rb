@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   has_many :swimmers, through: :swimmer_events
 
   def slug
-    self.name.downcase.split(" ").join("-")
+    self.name.gsub(/['-]/,'').downcase.split(" ").join("-")
   end
 
   def self.find_by_slug(slug)

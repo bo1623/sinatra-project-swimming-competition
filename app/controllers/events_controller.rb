@@ -21,7 +21,6 @@ class EventsController < ApplicationController
   end
 
   post '/events/register_swimmer/:slug' do
-    puts params
     @swimmer=Swimmer.find_by_slug(params[:slug])
     @events=@swimmer.events
     @events.each do |event|
@@ -38,8 +37,10 @@ class EventsController < ApplicationController
   end
 
   get '/events/:slug' do
+    binding.pry
     @event=Event.find_by_slug(params[:slug])
     @swimmers=@event.swimmers
+    erb :'/events/swimmers'
     #this should show the list of swimmers signed up for this event and their respective teams/times
   end
 

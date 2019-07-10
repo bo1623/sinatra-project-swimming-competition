@@ -3,7 +3,7 @@
 
   <ul>
   <%@events.each do |event|%>
-    <li><%=event.name%></li>
+    <li><a href='/events/<%=event.slug%>'><%=event.name%></a></li>
   <%end%>
   </ul>
 
