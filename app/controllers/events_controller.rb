@@ -20,6 +20,17 @@ class EventsController < ApplicationController
     redirect '/events'
   end
 
+  post '/events/register_swimmer/:slug' do
+    puts params
+    @swimmer=Swimmer.find_by_slug(params[:slug])
+    @events=@swimmer.events
+    @events.each do |event|
+      event.timing=params[:swimmer][@event.name][:timing]
+    end
+    @events.save
+    # when swimmer registers for new event does a new event object get created? is that necessary?
+  end
+
   get '/events/edit' do
     @events=Event.all
     #can select events to edit or delete, only available to admin
@@ -30,6 +41,11 @@ class EventsController < ApplicationController
     @swimmers=@event.swimmers
     #this should show the list of swimmers signed up for this event and their respective teams/times
   end
+
+  # get '/events/register_swimmer' do
+  #   erb :'/events/register_swimmer'
+  # end
+
 
 end
 

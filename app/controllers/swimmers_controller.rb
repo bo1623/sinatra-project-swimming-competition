@@ -37,9 +37,9 @@ class SwimmersController < ApplicationController
   end
 
   post '/swimmers/register_event' do
-    @swimmer=Swimmer.find_by(name: params[:name])
+    @swimmer=Swimmer.find_by(name: params[:swimmer][:name])
     if Team.find(session[:team_id])==@swimmer.team
-      @swimmer.event_ids = params[:event_ids]
+      @swimmer.event_ids = params[:swimmer][:event_ids]
       @swimmer.save
       redirect :"/swimmers/register_event/#{@swimmer.slug}"
     else

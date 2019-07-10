@@ -11,9 +11,11 @@
     <%end%>
   </datalist>
 
+  <br>
+
   <label>Select up to two events:</label><br>
     <%@events.each do |event|%>
-      <input type="checkbox" name="swimmer[event_ids][]" value="<%=event.id%>" id="<%=event.name%>"><%=event.name%></input>
+      <input type="checkbox" name="swimmer[event_ids][]" value="<%=event.id%>" id="<%=event.name%>"><%=event.name%></input><br>
     <%end%>
 
   <br>
