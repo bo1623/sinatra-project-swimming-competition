@@ -1,0 +1,31 @@
+
+<form method="post" action='/swimmers/<%=@swimmer.slug%>'>
+
+  <h3>Personal Details</h3>
+
+  <input type="hidden" id="hidden" name="_method" value="patch">
+  <label>Name: </label><input type="text" name="name" value="<%=@swimmer.name%>"><br>
+  <label>Gender: </label><input list="gender" name="gender" value="<%=@swimmer.gender%>" type="text"><br>
+  <datalist id="gender">
+    <!-- try making options compulsory -->
+    <option value="M">
+    <option value="F">
+  </datalist>
+  <label>Age: </label><input type="integer" name="age" value="<%=@swimmer.age%>"><br>
+
+  <br>
+
+  <h3>Registered Events</h3>
+
+  <ul>
+  <%@swimmer.events.each do |event|%>
+    <li><%=event.name%> Personal Best: <input type="time" name="[<%=event.name%>][timing]" value=<%=event.time_to_string%>></li>
+  <%end%>
+  </ul>
+
+  <input type="submit" value="Submit">
+
+</form>
+
+
+<%# <%=event.timing%>

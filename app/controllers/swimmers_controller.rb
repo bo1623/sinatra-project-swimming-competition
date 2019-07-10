@@ -60,7 +60,7 @@ class SwimmersController < ApplicationController
   get "/swimmers/:slug/edit" do
     redirect_if_not_logged_in
     @error_message = params[:error]
-    @swimmer = Swimmer.find(params[:slug])
+    @swimmer = Swimmer.find_by_slug(params[:slug])
     erb :'swimmers/edit'
   end
 

@@ -14,4 +14,8 @@ class Event < ActiveRecord::Base
     "#{self.gender}'s #{self.distance}m #{self.stroke} - #{self.division} Division"
   end
 
+  def time_to_string
+    self.timing.strftime("%M:%S")
+  end
+
 end
