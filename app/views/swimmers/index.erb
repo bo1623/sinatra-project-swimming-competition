@@ -5,6 +5,6 @@
 <%# add links to swimmer individual profile %>
 <ul>
 <%@swimmers.each do |swimmer|%>
-  <li><%=swimmer.name%></li>
+  <li><a href='/swimmers/<%=swimmer.slug%>'><%=swimmer.name%></a></li>
 <%end%>
 </ul>

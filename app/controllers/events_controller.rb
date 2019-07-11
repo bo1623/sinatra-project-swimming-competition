@@ -23,11 +23,16 @@ class EventsController < ApplicationController
   post '/events/register_swimmer/:slug' do
     @swimmer=Swimmer.find_by_slug(params[:slug])
     @events=@swimmer.events
+    signed_up_events=@swimmer.timings.map{|timing| timing.event.name}
     @events.each do |event|
-      @timing=Timing.create(personal_best: params[:swimmer][event.name][:timing])
-      @timing.swimmer=@swimmer
-      @timing.event=event
-      @timing.save
+      if signed_up_events.include?(event.name) #if the swimmer has signed up already
+        next
+      else #if the swimmer hasn't signed up for the event already
+        @timing=Timing.create(personal_best: params[:swimmer][event.name][:timing])
+        @timing.swimmer=@swimmer
+        @timing.event=event
+        @timing.save
+      end
     end
     redirect "/swimmers/#{@swimmer.slug}"
     # when swimmer registers for new event does a new event object get created? is that necessary?
