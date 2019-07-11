@@ -24,8 +24,10 @@ class EventsController < ApplicationController
     @swimmer=Swimmer.find_by_slug(params[:slug])
     @events=@swimmer.events
     @events.each do |event|
-      event.timing=params[:swimmer][event.name][:timing]
-      event.save
+      @timing=Timing.create(personal_best: params[:swimmer][event.name][:timing])
+      @timing.swimmer=@swimmer
+      @timing.event=event
+      @timing.save
     end
     redirect "/swimmers/#{@swimmer.slug}"
     # when swimmer registers for new event does a new event object get created? is that necessary?

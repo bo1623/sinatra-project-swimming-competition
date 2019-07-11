@@ -9,7 +9,7 @@
   <tr>
   <%@swimmers.each do |swimmer|%>
     <td><%=swimmer.name%></td>
-    <td><%=Event.find_by(swimmer: swimmer).timing.time_to_string%></td>
+    <td><%=Timing.find_by(swimmer_id: swimmer.id, event_id: @event.id).time_to_string%></td>
     <%# This won't work because an event has many swimmers, we need to create Timing class that belongs to and event and also belongs to a swimmer %>
   <%end%>
   </tr>

@@ -18,8 +18,8 @@
   <h3>Registered Events</h3>
 
   <ul>
-  <%@swimmer.events.each do |event|%>
-    <li><%=event.name%> Personal Best: <input type="time" name="[<%=event.name%>][timing]" value=<%=event.time_to_string%>></li>
+  <%@swimmer.timings.each do |timing|%>
+    <li><%=timing.event.name%> Personal Best: <input type="time" name="[<%=timing.event.name%>][timing]" value=<%=timing.time_to_string%>></li>
   <%end%>
   </ul>
 
