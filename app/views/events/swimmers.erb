@@ -4,12 +4,14 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Team</th>
     <th>Personal Best</th>
   </tr>
 
   <%@swimmers.each do |swimmer|%>
     <tr>
     <td><%=swimmer.name%></td>
+    <td><%=swimmer.team.teamname%></td>
     <td><%=Timing.find_by(swimmer_id: swimmer.id, event_id: @event.id).time_to_string%></td>
     </tr>
   <%end%>

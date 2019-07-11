@@ -1,6 +1,6 @@
-<p> Here are your Golf Bags, <%= @user.username %>
-<% @user.golf_bags.each do |bag| %>
+<p> <%= @team.teamname %>
+<% @team.swimmers.each do |swimmer| %>
   <ul>
-    <li><a href="/bags/<%=bag.id%>"><%= bag.name %></a></li>
+    <li><a href="/swimmers/<%=swimmer.slug%>"><%=swimmer.name %></a></li>
   </ul>
 <% end %>

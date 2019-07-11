@@ -1,7 +1,7 @@
 <ul>
 <%@teams.each do |team|%>
   <%if team.teamname!="Admin"%>
-    <li><%=team.teamname%></li>
+    <li><a href='/teams/<%=team.slug%>'><%=team.teamname%></a></li>
   <%end%>
 <%end%>
 </ul>

@@ -15,7 +15,7 @@
 
 <ul>
 <%@swimmer.timings.each do |timing|%>
-  <li><%=timing.event.name%> Personal Best: <%=timing.time_to_string%></li>
+  <li><a href='/events/<%=timing.event.slug%>'><%=timing.event.name%></a> Personal Best: <%=timing.time_to_string%></li>
 <%end%>
 </ul>
 

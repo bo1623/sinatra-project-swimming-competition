@@ -42,7 +42,7 @@ class TeamsController < ApplicationController
     end
   end
 
-  get '/teams/:id' do
+  get '/teams/:slug' do
     redirect_if_not_logged_in
     @team=Team.find(params[:id])
     erb :'/teams/show'
