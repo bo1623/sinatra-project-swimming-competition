@@ -83,4 +83,18 @@ class SwimmersController < ApplicationController
     end
   end
 
+
+  delete '/swimmers/:swimmer_slug/:event_slug/delete' do
+    @swimmer=Swimmer.find_by_slug(params[:swimmer_slug])
+    @team=@swimmer.team
+    @event=Event.find_by_slug(params[:event_slug])
+    if @team.id=session[:team_id]
+      @timing=Timing.find_by(swimmer_id: @swimmer.id, event_id: @event.id)
+      @timing.delete
+      redirect "/swimmers/#{@swimmer.slug}"
+    else
+      redirect "/swimmers/#{@swimmer.slug}"
+    end
+  end
+
 end
