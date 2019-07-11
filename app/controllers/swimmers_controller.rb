@@ -71,18 +71,6 @@ class SwimmersController < ApplicationController
     erb :'/swimmers/show'
   end
 
-  post "/swimmers/:id" do #where is this relevant? what path is dependent on this? How do we create or register new swimmers?
-    redirect_if_not_logged_in
-    @swimmer = Swimmer.find(params[:id])
-    if Swimmer.valid_params?(params)
-      @swimmer.update(params.select{|k|k=="name" || k=="capacity"})
-      #selecting the hashes where the key is equal to either name or capacity?
-      redirect "/swimmers/#{@swimmer.id}"
-    else
-      redirect "/swimmers/#{@swimmer.id}/edit?error=invalid attributes"
-    end
-  end
-
 
   delete '/swimmers/:swimmer_slug/:event_slug/delete' do
     @swimmer=Swimmer.find_by_slug(params[:swimmer_slug])
@@ -95,6 +83,13 @@ class SwimmersController < ApplicationController
     else
       redirect "/swimmers/#{@swimmer.slug}"
     end
+  end
+
+  patch '/swimmers/:swimmer_slug' do
+    @swimmer=Swimmer.find_by_slug(params[:swimmer_slug])
+    @swimmer.update(params[:swimmer])
+    @swimmer.save
+    redirect "/swimmers/#{@swimmer.slug}"
   end
 
 end

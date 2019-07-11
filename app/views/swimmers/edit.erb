@@ -4,16 +4,25 @@
   <h3>Personal Details</h3>
 
   <input type="hidden" id="hidden" name="_method" value="patch">
-  <label>Name: </label><input type="text" name="name" value="<%=@swimmer.name%>"><br>
-  <label>Gender: </label><input list="gender" name="gender" value="<%=@swimmer.gender%>" type="text"><br>
+  <label>Name: </label><input type="text" name="swimmer[name]" value="<%=@swimmer.name%>"><br>
+  <label>Gender: </label><input list="gender" name="swimmer[gender]" value="<%=@swimmer.gender%>" type="text"><br>
   <datalist id="gender">
     <!-- try making options compulsory -->
     <option value="M">
     <option value="F">
   </datalist>
-  <label>Age: </label><input type="integer" name="age" value="<%=@swimmer.age%>"><br>
+  <label>Age: </label><input type="integer" name="swimmer[age]" value="<%=@swimmer.age%>"><br>
 
   <br>
+
+  <input type="submit" value="Update Personal Details">
+
+</form>
+
+  <br>
+
+<form method="post" action='/swimmers/<%=@swimmer.slug%>'>
+  <input type="hidden" id="hidden" name="_method" value="patch">
 
   <h3>Registered Events</h3>
 
@@ -32,6 +41,8 @@
   <%end%>
   </ul>
 
-  <input type="submit" value="Submit">
+  <br>
+
+  <input type="submit" value="Update Timings">
 
 </form>
