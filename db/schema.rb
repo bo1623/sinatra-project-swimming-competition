@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 4) do
+ActiveRecord::Schema.define(version: 5) do
 
   create_table "events", force: :cascade do |t|
     t.string "stroke"
@@ -36,6 +36,12 @@ ActiveRecord::Schema.define(version: 4) do
   create_table "teams", force: :cascade do |t|
     t.string "teamname"
     t.string "password_digest"
+  end
+
+  create_table "timings", force: :cascade do |t|
+    t.time "personal_best"
+    t.integer "event_id"
+    t.integer "swimmer_id"
   end
 
 end

@@ -12,7 +12,7 @@
 
 <ul>
 <%@swimmer.timings.each do |timing|%>
-  <li><%=timing.event.name%> Personal Best:<%=timing.personal_best%></li>
+  <li><%=timing.event.name%> Personal Best: <%=timing.time_to_string%></li>
 <%end%>
 </ul>
 
