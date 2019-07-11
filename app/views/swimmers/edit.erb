@@ -21,16 +21,18 @@
 
   <br>
 
-<form method="post" action='/swimmers/<%=@swimmer.slug%>'>
-  <input type="hidden" id="hidden" name="_method" value="patch">
+
 
   <h3>Registered Events</h3>
 
   <ul>
   <%@swimmer.timings.each do |timing|%>
     <li>
-
-      <%=timing.event.name%> Personal Best: <input type="time" name="[<%=timing.event.name%>][timing]" value=<%=timing.time_to_string%>>
+      <form method="post" action='/swimmers/events/<%=@swimmer.slug%>'>
+        <input type="hidden" id="hidden" name="_method" value="patch">
+        <%=timing.event.name%> Personal Best: <input type="time" name="[timing][<%=timing.event.name%>][personal_best]" value=<%=timing.time_to_string%>>
+        <input type="submit" value="Update Timing">
+      </form>
 
       <form action='/swimmers/<%=@swimmer.slug%>/<%=timing.event.slug%>/delete' method="post">
         <input type="hidden" id="hidden" name="_method" value="delete">
@@ -42,7 +44,3 @@
   </ul>
 
   <br>
-
-  <input type="submit" value="Update Timings">
-
-</form>

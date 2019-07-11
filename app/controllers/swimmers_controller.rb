@@ -92,4 +92,19 @@ class SwimmersController < ApplicationController
     redirect "/swimmers/#{@swimmer.slug}"
   end
 
+  patch '/swimmers/events/:swimmer_slug' do
+    puts params
+    @swimmer=Swimmer.find_by_slug(params[:swimmer_slug])
+    @event=Event.find_by(name: params[:timing].keys[0])
+    @timing=Timing.find_by(swimmer_id: @swimmer.id, event_id: @event.id)
+    personal_best_update= "00:#{params[:timing]["#{@event.name}"][:personal_best]}"
+    #need to add "00:" at the beginning because Time object takes in the string in the format of "00:00:00"
+    #so if we provide just "00:25" then it will assume that it's 25 mins instead of 25 seconds
+    @timing.update(personal_best: personal_best_update)
+    @timing.save
+    redirect "/swimmers/#{@swimmer.slug}"
+    # this is the params hash for this patch {"timing"=>{"Boys 50m Freestyle - A Division"=>{"personal_best"=>"00:29"}}, "swimmer_slug"=>"ian-thorpe"}
+
+  end
+
 end
