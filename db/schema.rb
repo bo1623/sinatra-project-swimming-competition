@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 5) do
     t.string "gender"
     t.string "division"
     t.string "name"
-    t.time "timing"
+    t.time "meet_record"
   end
 
   create_table "swimmer_events", force: :cascade do |t|

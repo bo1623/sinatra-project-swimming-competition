@@ -8,7 +8,8 @@
     <nav>
       <% if logged_in? %>
 
-        <a href="/swimmers/new"> Register Swimmers </a>
+        <a href='/'>Home</a>
+        <a href="/swimmers/new"> Swimmer Sign Up </a>
         <a href="/logout"> Log Out </a>
         <p>Welcome, <%=current_user.teamname %></p>
 

@@ -14,7 +14,6 @@ class SwimmersController < ApplicationController
   end
 
   post '/swimmers' do
-    puts params
     redirect_if_not_logged_in
     if Swimmer.valid_params?(params)
       @team=Team.find(session[:team_id])
@@ -28,6 +27,7 @@ class SwimmersController < ApplicationController
   end
 
   get '/swimmers/register_event' do
+    redirect_if_not_logged_in
     @team=Team.find(session[:team_id])
     @swimmers=@team.swimmers
     @events=Event.all
