@@ -3,7 +3,7 @@ class SwimmersController < ApplicationController
   get "/swimmers" do
     redirect_if_not_logged_in
     @team=Team.find(session[:team_id])
-    @swimmers = Swimmer.all
+    @swimmers = @team.swimmers
     erb :'swimmers/index'
   end
 
