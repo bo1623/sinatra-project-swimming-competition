@@ -1,4 +1,4 @@
-class CreateEvents < ActiveRecord::Migration[5.2]
+class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
       t.string :stroke
@@ -6,7 +6,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.string :gender
       t.string :division #division for age category
       t.string :name
-      t.time :timing #let's try only one timing for the Events table, and for the meet record it can be a new swimmer called meet record or something
+      t.time :record #let's try only one timing for the Events table, and for the meet record it can be a new swimmer called meet record or something
     end
   end
 end

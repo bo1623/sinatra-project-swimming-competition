@@ -20,13 +20,13 @@ class TeamsController < ApplicationController
     else
       @team=Team.create(params)
       session[:team_id]=@team.id #important so that user is logged in as soon as the team signs up
-      redirect '/teams'
+      redirect '/events'
     end
   end
 
   get '/login' do
     if !!session[:team_id]
-      redirect '/teams'
+      redirect '/events'
     else
       erb :'/teams/login'
     end
@@ -36,7 +36,7 @@ class TeamsController < ApplicationController
     team=Team.find_by(teamname: params[:teamname])
     if team && team.authenticate(params[:password])
       session[:team_id]=team.id
-      redirect '/teams'
+      redirect '/events'
     else
       redirect '/signup'
     end
