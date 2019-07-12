@@ -8,10 +8,11 @@ class Event < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug)
-    #need to find a way to match slug with name or attributes of the name
     mod_slug=[slug.split("-")[0...-2].join(" "),slug.split("-")[-2..-1].join(" ")].join(" - ")
     self.find_by("LOWER(name)= ?", mod_slug)
-    #find a way to remove the '-' from name and then apply LOWER?
+    #the challenge above was getting the slug to match the name which had a hyphen in it. Because in the slug method
+    #I wanted to remove the hyphen before creating the slug and here in the find_by_slug method we're adding that hyphen back
+    #so that it matches with the original name
   end
 
   def make_name

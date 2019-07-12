@@ -5,8 +5,19 @@
 
   <label>Stroke: </label><input type="text" name="stroke">
   <label>Distance: </label><input type="text" name="distance">
-  <label>Gender: </label><input type="text" name="gender">
-  <label>Division: </label><input type="text" name="division">
+  <label>Gender: </label><input type="text" name="gender" list="gender">
+    <datalist id="gender">
+      <!-- try making options compulsory -->
+      <option value="Boy">
+      <option value="Girl">
+    </datalist>
+
+  <label>Division: </label><input type="text" name="division" list="division">
+  <datalist id="division"
+    <option value="A">
+    <option value="B">
+    <option value="C">
+  </datalist>
 
   <input type="submit" value="Submit">
 
