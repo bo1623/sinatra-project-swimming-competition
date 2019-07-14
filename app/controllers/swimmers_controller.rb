@@ -60,7 +60,7 @@ class SwimmersController < ApplicationController
   get "/swimmers/:slug/edit" do
     redirect_if_not_logged_in
     @error_message = params[:error]
-    @swimmer = Swimmer.find_by_slug(params[:slug])
+    @swimmer=Swimmer.find_by_slug(params[:slug]) #make this helper method
     erb :'swimmers/edit'
   end
 
@@ -72,7 +72,7 @@ class SwimmersController < ApplicationController
   end
 
 
-  delete '/swimmers/:swimmer_slug/:event_slug/delete' do
+  delete '/swimmers/:swimmer_slug/:event_slug/delete' do #deletes swimmer's participation in a race
     @swimmer=Swimmer.find_by_slug(params[:swimmer_slug])
     @team=@swimmer.team
     @event=Event.find_by_slug(params[:event_slug])
@@ -85,14 +85,14 @@ class SwimmersController < ApplicationController
     end
   end
 
-  patch '/swimmers/:swimmer_slug' do
+  patch '/swimmers/:swimmer_slug' do #update swimmer personal details
     @swimmer=Swimmer.find_by_slug(params[:swimmer_slug])
     @swimmer.update(params[:swimmer])
     @swimmer.save
     redirect "/swimmers/#{@swimmer.slug}"
   end
 
-  patch '/swimmers/events/:swimmer_slug' do
+  patch '/swimmers/events/:swimmer_slug' do #update swimmer's timing
     puts params
     @swimmer=Swimmer.find_by_slug(params[:swimmer_slug])
     @event=Event.find_by(name: params[:timing].keys[0])

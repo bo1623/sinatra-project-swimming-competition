@@ -30,6 +30,10 @@ class ApplicationController < Sinatra::Base
       Team.find(session[:team_id])
     end
 
+    def swimmer_by_slug
+      @swimmer = Swimmer.find_by_slug(params[:slug])
+    end
+
   end
 
 end

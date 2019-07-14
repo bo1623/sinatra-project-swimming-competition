@@ -52,8 +52,4 @@ class EventsController < ApplicationController
     #this should show the list of swimmers signed up for this event and their respective teams/times
   end
 
-  # get '/events/register_swimmer' do
-  #   erb :'/events/register_swimmer'
-  # end
-
 end
